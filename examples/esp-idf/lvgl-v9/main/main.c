@@ -9,19 +9,19 @@
 #include "lvgl.h"
 #include "bsp/esp-bsp.h"
 #include "bsp/display.h"
-#include "lv_demos.h"
+#include "ui.h"
+#include "ui_app.h"
 
 void app_main(void)
 {
     ESP_ERROR_CHECK(bsp_display_start() != NULL ? ESP_OK : ESP_FAIL);
     ESP_ERROR_CHECK(bsp_display_backlight_on());
-    ESP_ERROR_CHECK(bsp_display_brightness_set(50));
+    ESP_ERROR_CHECK(bsp_display_brightness_set(100));
 
     ESP_ERROR_CHECK(bsp_display_lock(0) ? ESP_OK : ESP_ERR_TIMEOUT);
 
-    // lv_demo_music();
-    lv_demo_benchmark();
-    // lv_demo_widgets();
+    ui_init();
+    ui_app_init();
 
     bsp_display_unlock();
 }
